@@ -21,6 +21,12 @@ body {
 
 .stats-container {
     display: flex;
+    align-items: center;
+}
+
+.stats-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0 30px lightblue;
 }
 
 .stats-card {
@@ -30,6 +36,7 @@ body {
     margin: 1%;
     width: 100%;
     text-align: center;
+
 }
 
 #num-contributions, #total-raised, #num-games {
@@ -73,3 +80,31 @@ button {
     margin: 1%;
     border-radius: 7px;
 }
+
+.our-games-link {
+    color : black;
+    margin: 0 0 0 20px;
+}
+
+.our-games-link:visited {
+    color:black;
+    text-decoration: 'none';
+
+}
+
+#search-bar-container {
+    display: flex;
+    justify-content: center;
+}
+
+#search-bar {
+    width: 300px;
+    border: 3px solid #758190;;
+    border-radius: 7px;
+}
+
+#search-bar-label {
+    margin-right: 10px;
+    color: #FFF;
+}
+
