@@ -45,8 +45,10 @@ function addGamesToPage(games) {
         gamesContainer.appendChild(gameObj);
     }
 
+    // Progress Bar Implementation
     const progressContainers = document.getElementsByClassName("progress-container");
 
+    // Iterate through every progress Container and update the bar to reflect the pledged/goal percentage.
     for(let progressContainer of progressContainers) {
         const progressBar = progressContainer.firstElementChild;
         const progressDisplay = progressBar.nextSibling.nextSibling;
@@ -207,8 +209,13 @@ const secondGameElt = document.createElement("p");
 secondGameElt.innerHTML = secondGame.name;
 secondGameContainer.appendChild(secondGameElt);
 
+
+// Implementation for Search Bar Feature
+
+// Select the search bar element
 const searchBar = document.getElementById("search-bar");
 
+// gameCheck function that was made to filter out the list of games based on the search text
 function gameCheck() {
     if(searchBar.value.length === 0) {
         showAllGames();
@@ -227,9 +234,9 @@ function gameCheck() {
     return;
 }
 
+// SearchResults function that used to correct an input delay bug for the displayed results
 function searchResults() {
     setTimeout(gameCheck, 100);
 }
 
-//searchBar.addEventListener("keydown", searchLength);
 searchBar.addEventListener("keydown", searchResults);
