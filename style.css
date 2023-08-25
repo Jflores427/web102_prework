@@ -108,3 +108,18 @@ button {
     color: #FFF;
 }
 
+.progress-container {
+    width: 100%;
+    color: #FFF;
+}
+
+.progress-bar {
+    color: green;
+    background-color: green;
+    user-select: none;
+}
+
+h4 {
+    color:black;
+}
+

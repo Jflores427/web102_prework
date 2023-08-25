@@ -27,7 +27,6 @@ const gamesContainer = document.getElementById("games-container");
 
 // create a function that adds all data from the games array to the page
 function addGamesToPage(games) {
-    //let i = 0;
     // loop over each item in the data
     for(let game of games) {
         const gameObj = document.createElement("div");
@@ -35,10 +34,26 @@ function addGamesToPage(games) {
         gameObj.innerHTML += ` <img class="game-img" src=${game.img}> 
                            <p> <strong> ${game.name} </strong> </p>
                            <p> <em>${game.description} </em> </p> 
-                           <p> Backers: ${game.backers} </p>`
+                           <p> Backers: ${game.backers} </p>
+                           <div class="progress-container">  
+                                    <div class="progress-bar">.</div>
+                                    <h4> ${ (game.pledged / game.goal) > 1 ? "100" : (game.pledged / game.goal * 100).toPrecision(3)}% </h4>  
+                            </div> `
+                           
+      
         const gamesContainer = document.getElementById("games-container");
         gamesContainer.appendChild(gameObj);
-        //console.log(++i);
+    }
+
+    const progressContainers = document.getElementsByClassName("progress-container");
+
+    for(let progressContainer of progressContainers) {
+        const progressBar = progressContainer.firstElementChild;
+        const progressDisplay = progressBar.nextSibling.nextSibling;
+        progressBar.style.width = progressDisplay.innerHTML;
+        if(Number(progressBar.style.width.substring(0, progressBar.style.width.length - 1)) < 1) {
+            progressBar.style.color = "white";
+        }
     }
 
         // create a new div element, which will become the game card
@@ -161,7 +176,6 @@ const displayStr = `A total of $${GAMES_JSON.reduce((acc, game) => {
     return acc + game.pledged;
 }, 0).toLocaleString("en-us")} has been raised for ${GAMES_JSON.length - numOfUnfundedGames} games${(numOfUnfundedGames !== 0) ? `. Currently, ${numOfUnfundedGames} remain unfunded. We need your help to fund these amazing games!` : `.` }`;
 
-console.log(displayStr);
 // create a new DOM element containing the template string and append it to the description container
 const descriptionStr = document.createElement("p");
 descriptionStr.innerHTML = displayStr;
@@ -203,8 +217,8 @@ function gameCheck() {
 
     deleteChildElements(gamesContainer);
 
-    const str1 = `${searchBar.value}`;
-    let re = new RegExp(str1, "i");
+    const searchBarValue = `${searchBar.value}`;
+    let re = new RegExp(searchBarValue, "i");
     const listOfGames = GAMES_JSON.filter((game) => {
         return game.name.search(re) === 0;
     });
@@ -213,9 +227,9 @@ function gameCheck() {
     return;
 }
 
-function searchLength() {
+function searchResults() {
     setTimeout(gameCheck, 100);
 }
 
 //searchBar.addEventListener("keydown", searchLength);
-searchBar.addEventListener("keydown", searchLength);
+searchBar.addEventListener("keydown", searchResults);
